@@ -1,0 +1,367 @@
+.kanban-board {
+  padding: 20px;
+  min-height: 100vh;
+  background: #f7fafc;
+}
+
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.board-header h1 {
+  margin: 0;
+  color: #2d3748;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.add-task-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-task-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.add-task-btn:active {
+  transform: translateY(0);
+}
+
+.error-banner {
+  background: #fed7d7;
+  color: #c53030;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #feb2b2;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-banner button {
+  background: none;
+  border: none;
+  color: #c53030;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.error-banner button:hover {
+  background: rgba(197, 48, 48, 0.1);
+}
+
+.board-columns {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  min-height: 550px;
+  height: 100%;
+}
+
+.board-column {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid #cbd5e0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  min-height: 550px;
+  height: 100%;
+}
+
+.board-column:hover {
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
+  border-color: #667eea;
+}
+
+.column-header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.column-header h3 {
+  margin: 0;
+  color: #2d3748;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.task-count {
+  background: rgba(255, 255, 255, 0.8);
+  color: #4a5568;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+.column-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  min-height: 200px;
+  transition: background-color 0.2s ease;
+}
+
+.column-content.dragging-over {
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 8px;
+}
+
+/* Scrollbar styling for columns */
+.column-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.column-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.column-content::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+.column-content::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+.kanban-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #718096;
+}
+
+.kanban-loading .loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.kanban-loading p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Empty column state */
+.column-content:empty::after {
+  content: 'No tasks yet';
+  display: block;
+  text-align: center;
+  color: #a0aec0;
+  font-style: italic;
+  padding: 40px 20px;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .kanban-board {
+    padding: 16px;
+  }
+  .board-columns {
+    gap: 16px;
+    min-height: 450px;
+  }
+  .board-column {
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 900px) {
+  .kanban-board {
+    padding: 12px;
+  }
+  .board-columns {
+    gap: 16px;
+    min-height: 400px;
+  }
+  .board-column {
+    min-width: 200px;
+  }
+  .board-header {
+    margin-bottom: 20px;
+  }
+  .board-header h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .kanban-board {
+    padding: 8px;
+  }
+  .board-columns {
+    gap: 12px;
+    min-height: 350px;
+  }
+  .board-column {
+    min-width: 180px;
+  }
+  .board-header {
+    margin-bottom: 16px;
+    padding: 0 4px;
+  }
+  .board-header h1 {
+    font-size: 22px;
+  }
+  .add-task-btn {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .kanban-board {
+    padding: 8px;
+  }
+  .board-columns {
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+  }
+  .board-column {
+    min-width: 0;
+    width: 100%;
+    min-height: 250px;
+    border-radius: 12px;
+  }
+  .board-header {
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+  .board-header h1 {
+    font-size: 20px;
+  }
+  .add-task-btn {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+  .column-header {
+    padding: 12px 16px;
+  }
+  .column-header h3 {
+    font-size: 16px;
+  }
+  .column-content {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanban-board {
+    padding: 8px;
+  }
+  .board-header {
+    margin-bottom: 12px;
+    padding: 0 4px;
+  }
+  .board-header h1 {
+    font-size: 18px;
+  }
+  .add-task-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  .column-header {
+    padding: 10px 12px;
+  }
+  .column-header h3 {
+    font-size: 15px;
+  }
+  .column-content {
+    padding: 8px;
+  }
+}
+
+/* Animation for new columns */
+.board-column {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects */
+.board-column:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Focus states for accessibility */
+.add-task-btn:focus,
+.error-banner button:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+} 

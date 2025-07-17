@@ -45,23 +45,79 @@ A full-stack MERN application featuring a real-time collaborative To-Do board wi
 ## 🏗️ Architecture
 
 ```
-To-Do_Board/
-├── Backend/                 # Node.js + Express + MongoDB
-│   ├── server.js           # Main server with Socket.IO
-│   ├── config.js           # Configuration settings
-│   ├── package.json        # Backend dependencies
-│   └── README.md           # Backend documentation
-└── Frontend/               # React + Vite
-    ├── src/
-    │   ├── components/     # React components
-    │   │   ├── Auth/       # Authentication components
-    │   │   ├── Board/      # Kanban board components
-    │   │   └── Task/       # Task-related components
-    │   ├── contexts/       # React contexts
-    │   ├── services/       # API and Socket.IO services
-    │   └── styles/         # CSS styles
-    ├── package.json        # Frontend dependencies
-    └── README.md           # Frontend documentation
+Directory structure:
+└── shatakshirajput-to-do-board.git/
+    ├── README.md
+    ├── Logic_Document.md
+    ├── Backend/
+    │   ├── README.md
+    │   ├── package.json
+    │   ├── server.js
+    │   ├── config/
+    │   │   └── db.js
+    │   ├── controllers/
+    │   │   ├── actionController.js
+    │   │   ├── authController.js
+    │   │   ├── taskController.js
+    │   │   └── userController.js
+    │   ├── middlewares/
+    │   │   └── authenticateToken.js
+    │   ├── models/
+    │   │   ├── ActionLog.js
+    │   │   ├── Task.js
+    │   │   └── User.js
+    │   ├── routes/
+    │   │   ├── actionRoutes.js
+    │   │   ├── authRoutes.js
+    │   │   ├── taskRoutes.js
+    │   │   └── userRoutes.js
+    │   ├── socket/
+    │   │   └── index.js
+    │   └── utils/
+    │       └── logAction.js
+    └── Frontend/
+        ├── README.md
+        ├── eslint.config.js
+        ├── index.html
+        ├── package.json
+        ├── vercel.json
+        ├── vite.config.js
+        └── src/
+            ├── App.css
+            ├── App.jsx
+            ├── index.css
+            ├── main.jsx
+            ├── components/
+            │   ├── Footer.css
+            │   ├── Footer.jsx
+            │   ├── Home.css
+            │   ├── Home.jsx
+            │   ├── Navbar.css
+            │   ├── Navbar.jsx
+            │   ├── Auth/
+            │   │   ├── Auth.css
+            │   │   ├── LoginForm.jsx
+            │   │   └── RegisterForm.jsx
+            │   ├── Board/
+            │   │   ├── ActivityLog.css
+            │   │   ├── ActivityLog.jsx
+            │   │   ├── KanbanBoard.css
+            │   │   └── KanbanBoard.jsx
+            │   └── Task/
+            │       ├── ConflictModal.css
+            │       ├── ConflictModal.jsx
+            │       ├── DeleteConfirmModal.css
+            │       ├── DeleteConfirmModal.jsx
+            │       ├── TaskCard.css
+            │       ├── TaskCard.jsx
+            │       ├── TaskForm.css
+            │       └── TaskForm.jsx
+            ├── contexts/
+            │   └── AuthContext.jsx
+            └── services/
+                ├── api.js
+                └── socket.js
+
 ```
 
 ## 🚀 Quick Start
@@ -197,14 +253,9 @@ npm run preview # Preview production build
 
 ## 🚀 Deployment
 
-### Backend Deployment (Heroku)
+### Backend Deployment (Render)
 ```bash
-cd Backend
-heroku create your-app-name
-heroku config:set MONGODB_URI=your-mongodb-atlas-uri
-heroku config:set JWT_SECRET=your-production-jwt-secret
-heroku config:set FRONTEND_URL=https://your-frontend-url.com
-git push heroku main
+Deploy the project on render with all the snv's stated 
 ```
 
 ### Frontend Deployment (Vercel/Netlify)
@@ -246,9 +297,6 @@ API_BASE_URL=https://your-backend-url.com/api
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -257,13 +305,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **MongoDB** for the flexible database
 - **Socket.IO** for real-time communication
 - **@hello-pangea/dnd** for drag-and-drop functionality
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-1. Check the [Issues](../../issues) page
-2. Create a new issue with detailed information
-3. Contact the development team
 
 ---
 

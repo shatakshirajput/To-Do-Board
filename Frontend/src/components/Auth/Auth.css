@@ -11,8 +11,13 @@
 .back-link {
   margin-bottom: 1.25rem;
   font-size: 0.9rem;
-  margin-right: 24rem;
+  align-self: flex-start;
+  margin-right: 0;
+  width: 100%;
+  max-width: 500px;
+  padding-left: 0.5rem;
 }
+
 
 
 .back-link a {
@@ -189,4 +194,11 @@ input.error {
 
 .checkbox-label a:hover {
   text-decoration: underline;
+}
+@media (max-width: 480px) {
+  .back-link {
+    padding-left: 0;
+    text-align: left;
+    font-size: 0.85rem;
+  }
 }

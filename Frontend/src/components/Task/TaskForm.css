@@ -48,16 +48,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 24px 0 24px;
+  padding: 24px;
   border-bottom: 1px solid #e2e8f0;
   margin-bottom: 24px;
-}
-
-.task-form-header h2 {
-  margin: 0;
-  color: #2d3748;
-  font-size: 24px;
-  font-weight: 700;
+  position: relative;
+  overflow: hidden;
 }
 
 .close-btn {
@@ -72,11 +67,21 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  flex-shrink: 0; /* prevents shrinking */
+  margin-left: 8px;
 }
 
 .close-btn:hover {
   background: #f7fafc;
   color: #4a5568;
+}
+
+
+.task-form-header h2 {
+  margin: 0;
+  color: #2d3748;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .task-form {
@@ -268,3 +273,112 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 } 
+
+/* === Base responsive already present for <= 768px === */
+@media (max-width: 768px) {
+  .task-form-overlay {
+    padding: 16px;
+  }
+
+  .task-form-modal {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .task-form-header {
+    padding: 20px 20px 0 20px;
+  }
+
+  .task-form-header h2 {
+    font-size: 20px;
+  }
+
+  .task-form {
+    padding: 0 20px 20px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+    padding: 14px 20px;
+  }
+}
+
+/* === NEW: Small phones (up to 480px) === */
+@media (max-width: 480px) {
+  .task-form-modal {
+    border-radius: 10px;
+  }
+  .task-form-header {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .close-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .task-form-header h2 {
+    font-size: 18px;
+  }
+
+  .task-form-header h2 {
+    font-size: 18px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .submit-btn,
+  .cancel-btn {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* === NEW: Large tablets / small laptops (769px to 1024px) === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .task-form-modal {
+    max-width: 600px;
+  }
+
+  .task-form-header h2 {
+    font-size: 22px;
+  }
+}
+
+/* === NEW: Large desktops (1440px and above) === */
+@media (min-width: 1440px) {
+  .task-form-modal {
+    max-width: 600px;
+  }
+
+  .task-form-header h2 {
+    font-size: 26px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 17px;
+    padding: 14px 18px;
+  }
+}

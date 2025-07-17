@@ -346,3 +346,73 @@
     transform: translateY(0);
   }
 } 
+@media (max-width: 480px) {
+  .conflict-modal-overlay {
+    padding: 12px;
+  }
+
+  .conflict-modal {
+    border-radius: 10px;
+    padding: 0;
+  }
+
+  .conflict-header {
+    padding: 16px 16px 0 16px;
+    margin-bottom: 16px;
+  }
+
+  .conflict-header h2 {
+    font-size: 18px;
+    gap: 6px;
+  }
+
+  .conflict-header p {
+    font-size: 14px;
+  }
+
+  .conflict-content {
+    padding: 0 16px;
+  }
+
+  .version-info {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .diff-values {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .option-label {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .option-text strong {
+    font-size: 13px;
+  }
+
+  .option-text small {
+    font-size: 11px;
+  }
+
+  .merge-field input,
+  .merge-field textarea,
+  .merge-field select {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .conflict-actions {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .cancel-btn,
+  .resolve-btn {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+}

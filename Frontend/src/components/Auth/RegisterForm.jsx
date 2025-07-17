@@ -61,10 +61,6 @@ const RegisterForm = () => {
       newErrors.confirmPassword = 'Passwords do not match';
     }
 
-    if (!formData.agreeTerms) {
-      newErrors.agreeTerms = 'You must agree to the Terms of Service';
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -80,7 +76,7 @@ const RegisterForm = () => {
     setLoading(true);
 
     try {
-      const { confirmPassword, agreeTerms, ...registerData } = formData;
+      const { confirmPassword, ...registerData } = formData;
       const response = await authAPI.register(registerData);
       login(response.data.user, response.data.token);
       navigate('/board');

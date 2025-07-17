@@ -99,3 +99,63 @@
   from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: scale(1); }
 } 
+@media (max-width: 768px) {
+  .delete-modal {
+    padding: 24px 20px 20px 20px;
+    min-width: 280px;
+    max-width: 95vw;
+  }
+
+  .delete-modal h3 {
+    font-size: 18px;
+  }
+
+  .delete-modal p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .confirm-btn,
+  .cancel-btn {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+
+  .delete-modal-actions {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .delete-modal {
+    padding: 20px 16px 16px 16px;
+    border-radius: 12px;
+    width: 90vw;
+  }
+
+  .delete-modal h3 {
+    font-size: 16px;
+  }
+
+  .delete-modal p {
+    font-size: 13px;
+  }
+
+  .delete-modal-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .confirm-btn,
+  .cancel-btn {
+    width: 100%;
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .close-btn {
+    top: 10px;
+    right: 10px;
+  }
+}

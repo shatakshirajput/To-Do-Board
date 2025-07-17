@@ -241,3 +241,99 @@
 .task-card[data-priority="Low"] {
   border-left: 4px solid #38a169;
 } 
+
+/* For tablets and below */
+@media (max-width: 768px) {
+  .task-card {
+    padding: 12px;
+    margin-bottom: 10px;
+    min-height: 100px;
+  }
+
+  .task-title {
+    font-size: 14px;
+  }
+
+  .task-description {
+    font-size: 13px;
+  }
+
+  .priority-badge {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .action-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .task-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+  .task-card {
+    padding: 10px;
+    margin-bottom: 8px;
+    min-height: 90px;
+    font-size: 13px;
+  }
+
+  .task-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .task-title {
+    font-size: 13px;
+  }
+
+  .task-description {
+    font-size: 12px;
+  }
+
+  .priority-badge {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+
+  .task-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .assigned-user {
+    gap: 4px;
+  }
+
+  .user-avatar {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+
+  .username {
+    font-size: 11px;
+  }
+
+  .task-date {
+    font-size: 10px;
+  }
+
+  .task-actions {
+    gap: 6px;
+    opacity: 1;
+  }
+
+  .action-btn {
+    width: 28px;
+    height: 28px;
+  }
+}

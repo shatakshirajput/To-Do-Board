@@ -15,17 +15,18 @@ const LoginForm = () => {
 
   const { login } = useAuth();
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
-    // Clear error when user starts typing
+
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: '',
       }));
     }
   };
@@ -66,8 +67,8 @@ const LoginForm = () => {
     } catch (error) {
       console.error('Login error:', error);
       setSubmitError(
-        error.response?.data?.message || 
-        'Login failed. Please try again.'
+        error.response?.data?.message ||
+          'Login failed. Please try again.'
       );
     } finally {
       setLoading(false);
@@ -76,19 +77,19 @@ const LoginForm = () => {
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
-        <h2>Welcome Back</h2>
-        <p className="auth-subtitle">Sign in to your account</p>
+      <div className="back-link">
+        <Link to="/">← Back to home</Link>
+      </div>
 
-        {submitError && (
-          <div className="error-message">
-            {submitError}
-          </div>
-        )}
+      <div className="auth-card">
+        <h2>Welcome back</h2>
+        <p className="auth-subtitle">Sign in to your account to continue</p>
+
+        {submitError && <div className="error-message">{submitError}</div>}
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email address</label>
             <input
               type="email"
               id="email"
@@ -99,7 +100,9 @@ const LoginForm = () => {
               placeholder="Enter your email"
               disabled={loading}
             />
-            {errors.email && <span className="error-text">{errors.email}</span>}
+            {errors.email && (
+              <span className="error-text">{errors.email}</span>
+            )}
           </div>
 
           <div className="form-group">
@@ -114,23 +117,25 @@ const LoginForm = () => {
               placeholder="Enter your password"
               disabled={loading}
             />
-            {errors.password && <span className="error-text">{errors.password}</span>}
+            {errors.password && (
+              <span className="error-text">{errors.password}</span>
+            )}
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="auth-button"
             disabled={loading}
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Signing in...' : 'Log in →'}
           </button>
         </form>
 
         <div className="auth-footer">
           <p>
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link to="/register" className="auth-link">
-              Sign up here
+              Sign up
             </Link>
           </p>
         </div>
@@ -139,4 +144,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm; 
+export default LoginForm;

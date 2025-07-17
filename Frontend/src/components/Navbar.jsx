@@ -1,27 +1,56 @@
-import React from 'react';
-import './Navbar.css';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ user, logout }) => {
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <nav className="navbar-home">
       <div className="navbar-logo">
         <span role="img" aria-label="logo" className="logo-icon">📝</span>
-        <span className="logo-text">To-Do Board</span>
+        <span className="logo-text">SyncPath</span>
       </div>
-      <input type="checkbox" id="nav-toggle" className="nav-toggle" aria-label="Toggle navigation" />
-      <label htmlFor="nav-toggle" className="nav-toggle-label" aria-label="Open navigation menu">
-        <span></span>
-      </label>
-      <ul className="navbar-links">
-        <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#about">About</a></li>
-        <li><Link to="/login" className={location.pathname === '/login' ? 'active' : ''}>Login</Link></li>
-      </ul>
+
+      {/* Navigation links */}
+      <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
+        {user ? (
+          <div className="nav-user-info">
+            <span className="user-greeting">Welcome, {user.username}!</span>
+            <button onClick={logout} className="logout-btn">Logout</button>
+          </div>
+        ) : (
+          <>
+            <Link 
+              to="/login" 
+              className={`nav-button ${location.pathname === '/login' ? 'active' : ''}`}
+              onClick={closeMenu}
+            >
+              Sign In
+            </Link>
+            <Link 
+              to="/register" 
+              className={`nav-button ${location.pathname === '/register' ? 'active' : ''}`}
+              onClick={closeMenu}
+            >
+              Sign Up
+            </Link>
+          </>
+        )}
+      </div>
+
+      {/* Mobile menu toggle */}
+      <div className="nav-toggle" onClick={toggleMenu}>
+        <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+        <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+        <span className={`bar ${menuOpen ? 'open' : ''}`}></span>
+      </div>
     </nav>
   );
 };
 
-export default Navbar; 
+export default Navbar;

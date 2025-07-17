@@ -25,26 +25,13 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
-// Main Board Component with Activity Log
+// Main Board Component
 const BoardPage = () => {
   const { user, logout } = useAuth();
 
   return (
     <div className="board-page">
-      <nav className="navbar">
-        <div className="nav-content">
-          <h2>To-Do Board</h2>
-          <div className="nav-user">
-            <span className="user-info">
-              Welcome, {user?.username}!
-            </span>
-            <button onClick={logout} className="logout-btn">
-              Logout
-            </button>
-          </div>
-        </div>
-      </nav>
-      
+      <Navbar user={user} logout={logout} />
       <div className="main-content">
         <div className="board-container">
           <KanbanBoard />
@@ -61,6 +48,7 @@ const BoardPage = () => {
 const App = () => {
   const location = useLocation();
   const isBoardPage = location.pathname === '/board';
+
   return (
     <AuthProvider>
       <div className="app">

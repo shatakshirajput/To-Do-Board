@@ -10,6 +10,7 @@ const RegisterForm = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    agreeTerms: false,
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -19,16 +20,16 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value,
     }));
-    // Clear error when user starts typing
+
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: '',
       }));
     }
   };
@@ -37,9 +38,9 @@ const RegisterForm = () => {
     const newErrors = {};
 
     if (!formData.username) {
-      newErrors.username = 'Username is required';
+      newErrors.username = 'Full name is required';
     } else if (formData.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters';
+      newErrors.username = 'Name must be at least 3 characters';
     }
 
     if (!formData.email) {
@@ -60,6 +61,10 @@ const RegisterForm = () => {
       newErrors.confirmPassword = 'Passwords do not match';
     }
 
+    if (!formData.agreeTerms) {
+      newErrors.agreeTerms = 'You must agree to the Terms of Service';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -75,14 +80,14 @@ const RegisterForm = () => {
     setLoading(true);
 
     try {
-      const { confirmPassword, ...registerData } = formData;
+      const { confirmPassword, agreeTerms, ...registerData } = formData;
       const response = await authAPI.register(registerData);
       login(response.data.user, response.data.token);
       navigate('/board');
     } catch (error) {
       console.error('Registration error:', error);
       setSubmitError(
-        error.response?.data?.message || 
+        error.response?.data?.message ||
         'Registration failed. Please try again.'
       );
     } finally {
@@ -92,92 +97,100 @@ const RegisterForm = () => {
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
-        <h2>Create Account</h2>
-        <p className="auth-subtitle">Join our collaborative workspace</p>
+      <div className="back-link">
+        <Link to="/">← Back to home</Link>
+      </div>
 
-        {submitError && (
-          <div className="error-message">
-            {submitError}
-          </div>
-        )}
+      <div className="auth-card">
+        <h2>Create account</h2>
+        <p className="auth-subtitle">Join thousands of teams already using TaskBoard</p>
+
+        {submitError && <div className="error-message">{submitError}</div>}
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className={errors.username ? 'error' : ''}
-              placeholder="Enter your username"
-              disabled={loading}
-            />
+            <label htmlFor="username">Full name</label>
+            <div className="input-wrapper">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className={errors.username ? 'error' : ''}
+                placeholder="Enter your full name"
+                disabled={loading}
+              />
+            </div>
             {errors.username && <span className="error-text">{errors.username}</span>}
           </div>
 
+
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={errors.email ? 'error' : ''}
-              placeholder="Enter your email"
-              disabled={loading}
-            />
+            <label htmlFor="email">Email address</label>
+            <div className="input-with-icon">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={errors.email ? 'error' : ''}
+                placeholder="Enter your email"
+                disabled={loading}
+              />
+            </div>
             {errors.email && <span className="error-text">{errors.email}</span>}
           </div>
 
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={errors.password ? 'error' : ''}
-              placeholder="Enter your password"
-              disabled={loading}
-            />
+            <div className="input-with-icon">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={errors.password ? 'error' : ''}
+                placeholder="Create a password"
+                disabled={loading}
+              />
+            </div>
             {errors.password && <span className="error-text">{errors.password}</span>}
           </div>
 
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className={errors.confirmPassword ? 'error' : ''}
-              placeholder="Confirm your password"
-              disabled={loading}
-            />
+            <label htmlFor="confirmPassword">Confirm password</label>
+            <div className="input-with-icon">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={errors.confirmPassword ? 'error' : ''}
+                placeholder="Confirm your password"
+                disabled={loading}
+              />
+            </div>
             {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
           </div>
 
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             className="auth-button"
             disabled={loading}
           >
-            {loading ? 'Creating account...' : 'Create Account'}
+            {loading ? 'Creating account...' : 'Sign up →'}
           </button>
         </form>
 
         <div className="auth-footer">
           <p>
             Already have an account?{' '}
-            <Link to="/login" className="auth-link">
-              Sign in here
-            </Link>
+            <Link to="/login" className="auth-link">Sign in</Link>
           </p>
         </div>
       </div>
@@ -185,4 +198,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm; 
+export default RegisterForm;

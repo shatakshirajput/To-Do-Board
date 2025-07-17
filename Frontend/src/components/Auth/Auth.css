@@ -11,12 +11,12 @@
 .back-link {
   margin-bottom: 1.25rem;
   font-size: 0.9rem;
-  align-self: flex-start;
-  margin-right: 0;
   width: 100%;
   max-width: 500px;
-  padding-left: 0.5rem;
+  padding-left: 2rem; /* match .auth-card padding */
+  box-sizing: border-box;
 }
+
 
 
 
@@ -196,9 +196,8 @@ input.error {
   text-decoration: underline;
 }
 @media (max-width: 480px) {
-  .back-link {
-    padding-left: 0;
-    text-align: left;
+   .back-link {
+    padding-left: 1rem; /* match reduced padding for smaller screens */
     font-size: 0.85rem;
   }
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
@@ -8,7 +9,11 @@ const Navbar = ({ user, logout }) => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
-
+  
+  useEffect(() => {
+  document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
+  return () => (document.body.style.overflow = 'auto');
+}, [menuOpen]);
   return (
     <nav className="navbar-home">
       <div className="navbar-logo">
